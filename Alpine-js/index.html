@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"
-      referrerpolicy="no-referrer"
-    ></script>
-    <style>
-      [x-cloak] {
-        display: none;
-      }
-    </style>
-    <title>Alpine Js</title>
-  </head>
-  <body>
-    <div class="container mx-auto mt-6 max-w-sm">
-      <h1 class="text-5xl mb-4">Alpine.js Demo</h1>
 
-      <!-- x-data (alpine component) is used as state and only applicable with in this div -->
-      <div
-        x-data="{
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" referrerpolicy="no-referrer"></script>
+  <style>
+    [x-cloak] {
+      display: none;
+    }
+  </style>
+  <title>Alpine Js</title>
+</head>
+
+<body>
+  <div class="container mx-auto mt-6 max-w-sm">
+    <h1 class="text-5xl mb-4">Alpine.js Demo</h1>
+
+    <!-- x-data (alpine component) is used as state and only applicable with in this div -->
+    <div x-data="{
         open:false,
         name:'Brad',
         search:'',
@@ -32,115 +31,99 @@
         {title:'Post Three'},
         {title:'Post Four'},
         ]
-    }"
-      >
-        <!-- x-on:click or @click is used as an event listner and will listen to the browser -->
-        <!-- x:bind (use to make the component dynamic  )-->
-        <button
-          x-on:click="open = !open"
-          x-bind:class="open ? 'bg-blue-800' : 'bg-gray-700 '"
-          class="text-white px-4 py-2 rounded-xl"
-        >
-          Toggle
-        </button>
-        <!-- x-show is used to show the div when the state is true -->
-        <div x-show="open" x-transition x-cloak>
-          <p class="bg-gray-200 p-4 my-6 rounded">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Perferendis explicabo asperiores possimus voluptate odio commodi at
-            vitae animi, velit consequatur quo molestiae nulla maiores minus aut
-            natus enim! Illum, libero.
-          </p>
-        </div>
-        <!-- x-text used for writing inner html and used for referencing the text declared in a state-->
-        <div class="my-4">
-          The value of name is <span x-text="name" class="font-bold"></span>
-        </div>
-
-        <!-- x-effect -->
-        <div x-effect=" console.log(open)"></div>
-
-        <!-- x-model use for referencing the value and made it dynamic -->
-        <input
-          x-model="search"
-          type="text"
-          class="border p-2 w-full mb-2 mt-6"
-          placeholder="Search for something..."
-        />
-        <p>
-          <span class="font-bold">Searching for:</span>
-          <span x-text="search"></span>
+    }">
+      <!-- x-on:click or @click is used as an event listner and will listen to the browser -->
+      <!-- x:bind (use to make the component dynamic  )-->
+      <button x-on:click="open = !open" x-bind:class="open ? 'bg-blue-800' : 'bg-gray-700 '"
+        class="text-white px-4 py-2 rounded-xl">
+        Toggle
+      </button>
+      <!-- x-show is used to show the div when the state is true -->
+      <div x-show="open" x-transition x-cloak>
+        <p class="bg-gray-200 p-4 my-6 rounded">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Perferendis explicabo asperiores possimus voluptate odio commodi at
+          vitae animi, velit consequatur quo molestiae nulla maiores minus aut
+          natus enim! Illum, libero.
         </p>
-        <!-- x-if used for conditional rendering of components -->
-        <template x-if="open">
-          <div class="bg-gray-50 p-2 mt-8">Template based on a condition</div>
-        </template>
-        <!-- x-for -->
-        <h3 class="text-2xl mt-6 mb-3 font-bold">Posts</h3>
-        <template x-for="post in posts">
-          <div x-text="post.title"></div>
-        </template>
-        <button
-          @click="posts.push({title:'New Post'})"
-          class="bg-blue-800 text-white px-4 py-2 rounded-lg mt-4"
-        >
-          Add Post
-        </button>
+      </div>
+      <!-- x-text used for writing inner html and used for referencing the text declared in a state-->
+      <div class="my-4">
+        The value of name is <span x-text="name" class="font-bold"></span>
+      </div>
 
-        <div class="my-6">
-          <!-- x-ref (used to access the other elements reference the Html tage i.e. div, input etc) -->
-          <div x-ref="text">Hello World</div>
-          <button
-            @click="$refs.text.remove()"
-            class="bg-black text-white p-2 rounded-lg"
-          >
-            Click
-          </button>
-        </div>
+      <!-- x-effect -->
+      <div x-effect=" console.log(open)"></div>
 
-        <!-- x-html used to access the html from another document or server -->
-        <div x-html="(await axios.get('./partial.html')).data"></div>
+      <!-- x-model use for referencing the value and made it dynamic -->
+      <input x-model="search" type="text" class="border p-2 w-full mb-2 mt-6" placeholder="Search for something..." />
+      <p>
+        <span class="font-bold">Searching for:</span>
+        <span x-text="search"></span>
+      </p>
+      <!-- x-if used for conditional rendering of components -->
+      <template x-if="open">
+        <div class="bg-gray-50 p-2 mt-8">Template based on a condition</div>
+      </template>
+      <!-- x-for -->
+      <h3 class="text-2xl mt-6 mb-3 font-bold">Posts</h3>
+      <template x-for="post in posts">
+        <div x-text="post.title"></div>
+      </template>
+      <button @click="posts.push({title:'New Post'})" class="bg-blue-800 text-white px-4 py-2 rounded-lg mt-4">
+        Add Post
+      </button>
 
-        <!-- $el (used to access the current element)-->
-        <button
-          x-on:click="$el.innerHTML = 'Hello World'"
-          class="mt-4 p-4 border"
-        >
-          Replace Text
-        </button>
-
-        <!-- x-init (fires off the javaScript when it is initialize ) -->
-        <!-- $watch (used to watch the data in console ) -->
-        <div x-init="$watch('posts',value => console.log(value))"></div>
-
-        <!-- $dispatch  (dispatches the event )-->
-        <div @notify="alert('You have been notified!')">
-          <button
-            @click="$dispatch('notify')"
-            class="bg-green-700 text-white p-2 mt-4 rounded-lg"
-          >
-            Notify
-          </button>
-        </div>
-
-        <!-- $data used to access x-data whole object -->
-        <button
-          @click="getLatestPost($data.posts)"
-          class="bg-orange-800 text-white mt-6 p-2 rounded-lg"
-        >
-          Get Latest Post
+      <div class="my-6">
+        <!-- x-ref (used to access the other elements reference the Html tage i.e. div, input etc) -->
+        <div x-ref="text">Hello World</div>
+        <button @click="$refs.text.remove()" class="bg-black text-white p-2 rounded-lg">
+          Click
         </button>
       </div>
+
+      <!-- x-html used to access the html from another document or server -->
+      <div x-html="(await axios.get('./partial.html')).data"></div>
+
+      <!-- $el (used to access the current element)-->
+      <button x-on:click="$el.innerHTML = 'Hello World'" class="mt-4 p-4 border">
+        Replace Text
+      </button>
+
+      <!-- x-init (fires off the javaScript when it is initialize ) -->
+      <!-- $watch (used to watch the data in console ) -->
+      <div x-init="$watch('posts',value => console.log(value))"></div>
+
+      <!-- $dispatch  (dispatches the event )-->
+      <div @notify="alert('You have been notified!')">
+        <button @click="$dispatch('notify')" class="bg-green-700 text-white p-2 mt-4 rounded-lg">
+          Notify
+        </button>
+      </div>
+
+      <!-- $data used to access x-data whole object -->
+      <button @click="getLatestPost($data.posts)" class="bg-orange-800 text-white mt-6 p-2 rounded-lg">
+        Get Latest Post
+      </button>
+
+      <!-- x-mask plugin (used for providing a specific type to the input) -->
+      <div class="mt-6">
+        <h3 class="text-2xl mb-2">Enter a date:</h3>
+        <input class="border w-full p-2" x-mask="99/99/9999" placeholder="MM/DD/YYYY">
+      </div>
+
     </div>
+  </div>
 
-    <footer x-data class="text-center mt-10">
-      <p>Copyright &copy; <span x-text="new Date().getFullYear()"></span></p>
-    </footer>
+  <footer x-data class="text-center mt-10">
+    <p>Copyright &copy; <span x-text="new Date().getFullYear()"></span></p>
+  </footer>
 
-    <script>
-      function getLatestPost(posts) {
-        console.log(posts.slice(-1).pop());
-      }
-    </script>
-  </body>
+  <script>
+    function getLatestPost(posts) {
+      console.log(posts.slice(-1).pop());
+    }
+  </script>
+</body>
+
 </html>
